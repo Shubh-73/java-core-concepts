@@ -39,3 +39,16 @@ class SingletonBillPugh {
         return SingletonHolder.instance;
     }
 }
+
+
+/**
+ *
+ * Important Notes
+ *
+ * Volatile keyword is used to ensure the visibility and ordering of the variables
+ * across multiple threads. When a variable is declared volatile, it guarantees
+ * visibility to other threads, ordering of read and write to the instance.
+ *
+ *
+ *
+ */
