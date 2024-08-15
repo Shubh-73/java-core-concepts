@@ -1,0 +1,21 @@
+Observer design pattern is implemented here taking the example of cricket scores updates.
+
+In observer pattern, there are two main entities -> subject and observer.
+
+There are certain functionalities with subject like:
+
+    1. register all the observers who want to receive the updates about the change
+        of state of the subject
+
+    2. remove all those observers who no longer wish to receive notifications
+    3. update the change of state of observer
+
+Then there is an observer which should receive updates about the change of state.
+
+To make both the observer as well as the subject loosely coupled, both of them are
+added as an interface with the contract promising the functionalities mentioned above.
+
+
+Every subject has list of updates and whenever there are any changes, the subject iterates
+over all the observers and call its update method and provide new updates.
+

@@ -4,11 +4,33 @@ public class ObserverMain {
 
     public static void main(String[] args) {
 
-        CricketScoreData cricketData = new CricketScoreData();
-        CricketScoreDisplay cricketDisplay = new CricketScoreDisplay();
-        cricketData.registerOberver(cricketDisplay);
-        System.out.println("new observer added");
-        cricketData.setScore(200, 5, 31.5);
-        System.out.println("scores update");
+         CricketScoreData cricketScores = new CricketScoreData();
+         CricketScoreDisplay observer1 = new CricketScoreDisplay();
+         CricketScoreDisplay observer2 = new CricketScoreDisplay();
+
+         cricketScores.registerOberver(observer1);
+         cricketScores.registerOberver(observer2);
+
+         Thread t1 = new Thread(() -> {
+             System.out.println("scores of India vs Australia");
+             cricketScores.setScore(100, 2, 23.2);
+         }, "thread t1");
+
+         Thread t2 = new Thread(() -> {
+             System.out.println("Scores of Pakistan vs England");
+             cricketScores.setScore(130, 4, 23.2);
+         }, "thread t2");
+
+
+         t1.start();
+         t2.start();
+
+
+         try {
+             t1.join();
+             t2.join();
+         } catch (InterruptedException e) {
+             e.printStackTrace();
+         }
     }
 }

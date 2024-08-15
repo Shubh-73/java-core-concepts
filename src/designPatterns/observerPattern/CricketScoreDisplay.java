@@ -8,14 +8,14 @@ public class CricketScoreDisplay implements Observer{
 
 
     @Override
-    public void update(int runs, int wickets, double overs){
+    public synchronized void update(int runs, int wickets, double overs){
         this.runs = runs;
         this.wickets = wickets;
         this.overs = overs;
         display();
     }
 
-    public void display(){
+    public synchronized void display(){
         System.out.println("Cricket score : " + runs + "/" + wickets + " " + overs + "overs");
 
     }
