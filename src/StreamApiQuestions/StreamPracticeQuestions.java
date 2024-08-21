@@ -2,6 +2,7 @@ package StreamApiQuestions;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.toList;
@@ -35,6 +36,40 @@ public class StreamPracticeQuestions {
         //stream the values -> filter on the basis of condition -> sort using field -> collect
 
 
+        //second question
+        //unique cities -> stream all transaction -> get all cities -> distint()
+
+        List<String> uniqueCityNames = transactions.stream().
+                map(t -> t.getTrader().getCity()).distinct().collect(toList());
+
+
+        //third question
+        //Find all the traders from Kolkata
+        List<Trader> tradersFromKolkata = transactions.stream().map(t  -> t.getTrader())
+                .filter(trader -> trader.getCity().equals("Kolkata"))
+                .sorted(comparing(Trader::getName)).collect(toList());
+
+        //fourth question
+        //return string of all traders sorted alphabetically
+        String traderNames = transactions.stream().map(t -> t.getTrader().getName())
+                .distinct()
+                .sorted()
+                .reduce("", (name1 , name2) -> name1 + name2);
+
+        //fifth question
+        //find if there is any trader in Mumbai
+
+        Boolean mumbaiBasedTrader = transactions.stream()
+                .anyMatch(t -> t.getTrader().getCity().equals("Mumbai"));
+
+
+        //sixth question
+        //find the transaction value from Kolkata traders
+        Optional<Long> tradeValueFromKolkata = transactions.stream()
+                .filter(t -> t.getTrader().getCity().equals("Kolkata"))
+                .map(Transaction::getValue)
+                .map(Long::valueOf)
+                .reduce(Long::sum);
 
     }
 }
