@@ -1,5 +1,9 @@
 package designPatterns.builderPattern;
 
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 public class Vehicle {
 
     private String type;
@@ -47,6 +51,14 @@ public class Vehicle {
 
     private int getWheels(){
         return this.wheels;
+    }
+
+    public Map<String, Vehicle> getVehicleMap(List<Vehicle> vehicles){
+
+        return vehicles.stream().filter(v -> v.getHorsePower() > 500).collect(Collectors.toMap(
+                Vehicle::getType,
+                v -> v
+        ));
     }
 
     public static class VehicleBuilder {
