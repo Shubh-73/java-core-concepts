@@ -1,6 +1,6 @@
 package StreamApiQuestions;
 
-public class Transaction {1
+public class Transaction {
 
     private final Trader trader;
     private final int year;
